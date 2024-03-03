@@ -1,0 +1,26 @@
+#game {
+  display: flex;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(
+    var(--GRID_WIDTH),
+    calc(80vw / var(--GRID_WIDTH))
+  );
+}
+
+#dash {
+  width: 20vw;
+  border: 2px gray solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background-color: white;
+  border: 1px gray solid;
+}

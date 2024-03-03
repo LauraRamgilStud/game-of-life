@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Kryds og Bolle</title>
+  </head>
+  <body>
+    <div id="game">
+      <div id="board"></div>
+      <div id="dash">
+        <h3 class="heading">Game Of Life</h3>
+        <ul class="description-list">
+          <li>
+            Any live cell with fewer than two live neighbours dies, by
+            underpopulation.
+          </li>
+          <li>
+            Any live cell with two or three live neighbours lives on to the next
+            generation.
+          </li>
+          <li>
+            Any live cell with more than three live neighbors dies, by
+            overpopulation.
+          </li>
+          <li>
+            Any dead cell with exactly three live neighbors becomes a live cell,
+            by reproduction.
+          </li>
+        </ul>
+
+        <button id="start-btn">Start</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
