@@ -5,6 +5,7 @@ const GRID_HEIGHT = 25;
 let model = [];
 let gameInterval;
 let isGameRunning = false;
+let generations = 0;
 
 window.addEventListener("load", start);
 
@@ -30,6 +31,8 @@ function startGame() {
 function gameLoop() {
   updateModel();
   displayBoard();
+  generations++;
+  showGenerations();
   if (isGameRunning) {
     gameInterval = setTimeout(gameLoop, 1000); // Call the game loop recursively only if the game is running
   }
@@ -43,9 +46,12 @@ function pauseGame() {
 
 function stopGame() {
   isGameRunning = false;
+  clearInterval(gameInterval);
   toggleButtons();
   createModel();
   displayBoard();
+  generations = 0;
+  showGenerations();
 }
 
 /* ############## VIEW ################ */
@@ -83,6 +89,11 @@ function boardClicked(evt) {
     const col = cell.dataset.col;
     selectCell(row, col);
   }
+}
+
+function showGenerations() {
+  const generationsElement = document.querySelector("#generations");
+  generationsElement.innerHTML = `Generations: ${generations}`;
 }
 
 /* ############## MODEL ################ */
