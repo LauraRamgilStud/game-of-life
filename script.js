@@ -3,6 +3,8 @@
 const GRID_WIDTH = 40;
 const GRID_HEIGHT = 25;
 let model = [];
+let gameInterval;
+let isGameRunning = false;
 
 window.addEventListener("load", start);
 
@@ -20,10 +22,30 @@ function selectCell(row, col) {
 }
 
 function startGame() {
-  setInterval(() => {
-    updateModel();
-    displayBoard();
-  }, 1000);
+  isGameRunning = true;
+  toggleButtons();
+  gameInterval = setTimeout(gameLoop, 1000); // start the game loop
+}
+
+function gameLoop() {
+  updateModel();
+  displayBoard();
+  if (isGameRunning) {
+    gameInterval = setTimeout(gameLoop, 1000); // Call the game loop recursively only if the game is running
+  }
+}
+
+function pauseGame() {
+  isGameRunning = false;
+  toggleButtons();
+  clearInterval(gameInterval);
+}
+
+function stopGame() {
+  isGameRunning = false;
+  toggleButtons();
+  createModel();
+  displayBoard();
 }
 
 /* ############## VIEW ################ */
@@ -34,6 +56,24 @@ function makeBoardClickable() {
 
 function makeButtonClickable() {
   document.querySelector("#start-btn").addEventListener("click", startGame);
+  document.querySelector("#pause-btn").addEventListener("click", pauseGame);
+  document.querySelector("#stop-btn").addEventListener("click", stopGame);
+}
+
+function toggleButtons() {
+  const startBtn = document.querySelector("#start-btn");
+  const pauseBtn = document.querySelector("#pause-btn");
+  const stopBtn = document.querySelector("#stop-btn");
+
+  if (isGameRunning) {
+    startBtn.style.display = "none";
+    pauseBtn.style.display = "block";
+    stopBtn.style.display = "block";
+  } else {
+    startBtn.style.display = "block";
+    pauseBtn.style.display = "none";
+    stopBtn.style.display = "none";
+  }
 }
 
 function boardClicked(evt) {
